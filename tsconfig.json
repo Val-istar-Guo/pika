@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib",
+    "moduleResolution": "node",
+    // "module": "esnext",
+    "target": "es6",
+    "strict": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "baseUrl": "./",
+    "noEmitOnError": true,
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "plugins": [
+      { "transform": "@zerollup/ts-transform-paths" }
+    ]
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts"]
+}
