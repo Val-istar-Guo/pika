@@ -141,6 +141,7 @@ export class Service {
           const args = argsMeta.filter(i => i.name === name).sort((a, b) => a.index - b.index).map(i => i.fn(ctx))
           const result = await instance[name](...args, ctx)
           if (result) ctx.body = result
+          else ctx.status = 200
 
           if (options.validate) {
             const responseHeadersSchema = schema[SchemaPart.responseHeaders]
