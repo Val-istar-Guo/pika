@@ -1,6 +1,0 @@
-export const COTL = 'PIKA_DEC_CONTROL'
-export const PATH = 'PIKA_DEC_PATH'
-export const PARAM = 'PIKA_DEC_PARAM'
-export const SCHEMA = 'PIKA_DEC_SCHEMA'
-export const DESCRIPTION = 'PIKA_DEC_DESCRIPTION'
-export const TAG = 'PIKA_DEC_TAG'

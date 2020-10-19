@@ -2,24 +2,22 @@
   "compilerOptions": {
     "outDir": "./lib",
     "moduleResolution": "node",
-    // "module": "esnext",
-    "target": "es6",
+    "module": "commonjs",
+    "target": "ESNext",
     "strict": true,
     "noImplicitAny": false,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "declaration": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": false,
     "baseUrl": "./",
     "noEmitOnError": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@root/*": ["./*"]
     },
-    "plugins": [
-      { "transform": "@zerollup/ts-transform-paths" }
-    ]
+    "plugins": [{ "transform": "typescript-transform-paths" }]
   },
   "exclude": ["node_modules"],
+  "files": ["index.ts"],
   "include": ["src/**/*.ts"]
 }

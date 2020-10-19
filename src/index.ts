@@ -1,37 +1,49 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import 'reflect-metadata'
-import { COTL, DESCRIPTION } from '@/const'
-import { Decorator } from '@/types'
+import fromEntries from 'fromentries'
 
-export * from '@/types'
-export * from '@/method'
-export * from '@/schema'
-export * from '@/args'
-export * from '@/service'
-export * from '@/tags'
 
-export interface ControlOptions {
-  prefix?: string
+interface PossibleValues {
+  [key: string]: (value) => boolean
 }
 
-export function Control(options: string)
-export function Control(options: ControlOptions)
-export function Control(options: (ControlOptions | string) = '') {
-  return function<T>(target: T): T {
-    let meta: ControlOptions
+export default class Pika<T extends PossibleValues> {
+  private variable: any
+  private possibleValues: T
 
-    if (typeof options === 'string') meta = { prefix: options }
-    else meta = options
-
-    Reflect.defineMetadata(COTL, meta, target)
-    return target
+  constructor(variable: any, possibleValues: T) {
+    this.variable = variable
+    this.possibleValues = possibleValues
   }
-}
 
-export function Description(str): Decorator {
-  return function(target, name) {
-    const meta = Reflect.getMetadata(DESCRIPTION, target, name)
-    if (meta) throw new Error(`Don't define description angin for ${name}`)
-    Reflect.defineMetadata(DESCRIPTION, str, target, name)
+  get is(): Record<keyof T, boolean> {
+    const value = this.variable
+
+    const pairs = Object.entries(this.possibleValues)
+      .map(([key, fn]) => ([key, fn(value)]))
+
+    return fromEntries(pairs) as Record<keyof T, boolean>
+  }
+
+  get not(): Record<keyof T, boolean> {
+    const value = this.variable
+
+    const pairs = Object.entries(this.possibleValues)
+      .map(([key, fn]) => ([key, !fn(value)]))
+
+    return fromEntries(pairs) as Record<keyof T, boolean>
+  }
+
+  public switch<U>(mapping: Partial<Record<keyof T | 'default' | 'priority', U>>): U {
+    if (!mapping.default) throw new TypeError('Must set default value.')
+    if (mapping.priority !== undefined && !(typeof mapping.priority === 'number' && isNaN(mapping.priority))) return mapping.priority
+
+    const keys = Object.keys(mapping).filter(key => key !== 'default' && key !== 'priority')
+
+    const value = this.variable
+    for (const key of keys) {
+      const match = this.possibleValues[key]
+      if (match(value)) return mapping[key] as U
+    }
+
+    return mapping.default
   }
 }
