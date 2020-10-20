@@ -2,7 +2,7 @@
   "name": "@miaooo/pika",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "可以进行服务注册的装饰器风格的koa路由开发中间件",
   "scripts": {
     "test": "ava",
