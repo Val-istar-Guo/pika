@@ -1,5 +1,9 @@
-import fromEntries from 'fromentries'
-
+function fromEntries<T>(iterable: Iterable<[string, T]>): Record<string, T> {
+  return [...iterable].reduce((obj, [key, val]) => {
+    obj[key] = val
+    return obj
+  }, {})
+}
 
 interface PossibleValues {
   [key: string]: (value) => boolean
@@ -18,7 +22,7 @@ export default class Pika<T extends PossibleValues> {
     const value = this.variable
 
     const pairs = Object.entries(this.possibleValues)
-      .map(([key, fn]) => ([key, fn(value)]))
+      .map(([key, fn]): [string, any] => ([key, fn(value)]))
 
     return fromEntries(pairs) as Record<keyof T, boolean>
   }
@@ -27,7 +31,7 @@ export default class Pika<T extends PossibleValues> {
     const value = this.variable
 
     const pairs = Object.entries(this.possibleValues)
-      .map(([key, fn]) => ([key, !fn(value)]))
+      .map(([key, fn]): [string, any] => ([key, !fn(value)]))
 
     return fromEntries(pairs) as Record<keyof T, boolean>
   }
