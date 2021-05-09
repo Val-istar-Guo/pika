@@ -1,4 +1,4 @@
-function fromEntries<T>(iterable: Iterable<[string, T]>): Record<string, T> {
+function fromEntries<T>(iterable: Array<[string, T]>): Record<string, T> {
   return [...iterable].reduce((obj, [key, val]) => {
     obj[key] = val
     return obj
