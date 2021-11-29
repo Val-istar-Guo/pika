@@ -2,7 +2,7 @@
   "name": "@miaooo/pika",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Easy-to-use config hierarchical configuration.",
   "scripts": {
     "test": "ava",

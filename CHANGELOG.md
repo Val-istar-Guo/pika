@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://www.github.com/Val-istar-Guo/pika/compare/v0.0.5...v0.0.6) (2021-11-29)
+
+
+### Bug Fixes
+
+* cannot set default to false ([ef2c184](https://www.github.com/Val-istar-Guo/pika/commit/ef2c184434961d6bb11540f83cb3e89ef58c0720))
+
 ### [0.0.5](https://www.github.com/Val-istar-Guo/pika/compare/v0.0.4...v0.0.5) (2021-05-09)
 
 
