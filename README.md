@@ -90,11 +90,6 @@ If none of the conditions are matched, the word `default`
 3. When `new Pick` is initialized, all the set judgment rules must be mutually exclusive, otherwise `.swtich` cannot guarantee which value will be returned when multiple conditions are matched at the same time.
 <!-- addition -->
 
-## Sponsor
-
-Support code development on patron.
-
-[![patron](https://c5.patreon.com/external/logo/become_a_patron_button@2x.png)](https://www.patreon.com/bePatron?u=22478507)
 
 ## Contributing & Development
 
