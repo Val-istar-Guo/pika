@@ -37,7 +37,7 @@ export default class Pika<T extends PossibleValues> {
   }
 
   public switch<U>(mapping: Partial<Record<keyof T | 'default' | 'priority', U>>): U {
-    if (!mapping.default) throw new TypeError('Must set default value.')
+    if (!('default' in mapping)) throw new TypeError('Must set default value.')
     if (mapping.priority !== undefined && !(typeof mapping.priority === 'number' && isNaN(mapping.priority))) return mapping.priority
 
     const keys = Object.keys(mapping).filter(key => key !== 'default' && key !== 'priority')
@@ -48,6 +48,6 @@ export default class Pika<T extends PossibleValues> {
       if (match(value)) return mapping[key] as U
     }
 
-    return mapping.default
+    return mapping.default as U
   }
 }
